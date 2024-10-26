@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="account.css">
+</head>
+<body>
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <i class="fa-solid fa-spinner fa-spin" style="color: #4c291a;"></i>
+    </div>    
+    <script src="loading.js"></script>
+    
+<div class="account-page">
+    <i class="fa-solid fa-arrow-left back-btn" onclick="goHome()"></i>
+
+    <h2>My Account</h2>
+
+    <!-- Profile Picture Section -->
+    <div class="profile-picture">
+        <h3>Profile Picture</h3>
+        <img id="profileImage" src="default-profile.jpg">
+        <button type="button" onclick="triggerFileUpload()">Upload</button>
+        <button type="button" onclick="removeProfilePicture()">Remove</button>
+        <input type="file" id="profileUpload" accept="image/*" style="display:none;" onchange="uploadProfilePicture()">
+    </div>
+
+    <!-- User Details Section -->
+    <div class="user-details">
+        <h3>Personal Details</h3>
+        <div class="info-box">
+            <div class="detail-item" id="usernameItem">
+                <strong>Username:</strong>
+                <span class="view-mode" id="usernameView"></span>
+                <input type="text" class="edit-mode" id="usernameEdit">
+                <button onclick="toggleEdit('username')">Edit</button>
+            </div>
+            <div class="detail-item" id="emailItem">
+                <strong>Email:</strong>
+                <span class="view-mode" id="emailView"></span>
+                <input type="text" class="edit-mode" id="emailEdit">
+                <button onclick="toggleEdit('email')">Edit</button>
+            </div>
+            <div class="detail-item" id="phoneItem">
+                <strong>Phone Number:</strong>
+                <span class="view-mode" id="phoneView"></span>
+                <input type="text" class="edit-mode" id="phoneEdit">
+                <button onclick="toggleEdit('phone')">Edit</button>
+            </div>
+            <button class="save-btn" onclick="saveDetails()">Save Changes</button>
+        </div>
+    </div>
+
+    <!-- Delivery Address Section -->
+    <div class="address-details">
+        <h3>Delivery Addresses</h3>
+        <ul class="address-list" id="addressList"></ul>
+        <button class="add-address-btn" onclick="showAddressInput()">Add Address</button>
+        <div id="addressInput" class="address-input">
+            <input type="text" id="newAddressInput">
+            <button class="save-btn" onclick="saveAddress()">Save</button>
+        </div>
+    </div>
+
+    <!-- Logout Section -->
+    <button class="logout-btn" onclick="logout()">Log Out</button>
+</div>
+
+<script>
+    const user = {
+        username: localStorage.getItem('username') || "john_doe",
+        email: localStorage.getItem('email') || "john.doe@example.com",
+        phone: localStorage.getItem('phone') || "123-456-7890",
+        profileImage: localStorage.getItem('profileImage') || "default-profile.jpg",
+        addresses: JSON.parse(localStorage.getItem('addresses')) || ["123 Main St, City, Country"]
+    };
+
+    window.onload = function() {
+        document.getElementById('usernameView').textContent = user.username;
+        document.getElementById('emailView').textContent = user.email;
+        document.getElementById('phoneView').textContent = user.phone;
+        document.getElementById('profileImage').src = user.profileImage;
+        loadAddresses();
+    };
+
+    function triggerFileUpload() {
+        document.getElementById('profileUpload').click();
+    }
+
+    function uploadProfilePicture() {
+        const fileInput = document.getElementById('profileUpload');
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profileImage').src = e.target.result;
+                user.profileImage = e.target.result;
+                localStorage.setItem('profileImage', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function removeProfilePicture() {
+        if (confirm("Are you sure you want to remove your profile picture?")) {
+            document.getElementById('profileImage').src = 'default-profile.jpg';
+            user.profileImage = 'default-profile.jpg';
+            localStorage.setItem('profileImage', 'default-profile.jpg');
+        }
+    }
+
+    function toggleEdit(field) {
+        const viewSpan = document.getElementById(field + 'View');
+        const editInput = document.getElementById(field + 'Edit');
+        const detailItem = document.getElementById(field + 'Item');
+
+        if (detailItem.classList.contains('editing')) {
+            viewSpan.textContent = editInput.value;
+            user[field] = editInput.value;
+            localStorage.setItem(field, editInput.value);
+            detailItem.classList.remove('editing');
+        } else {
+            editInput.value = viewSpan.textContent;
+            detailItem.classList.add('editing');
+        }
+    }
+
+    function saveDetails() {
+        document.getElementById('usernameView').textContent = user.username;
+        document.getElementById('emailView').textContent = user.email;
+        document.getElementById('phoneView').textContent = user.phone;
+    }
+
+    function showAddressInput() {
+        document.getElementById('addressInput').style.display = 'block';
+    }
+
+    function saveAddress() {
+        const newAddress = document.getElementById('newAddressInput').value;
+        if (newAddress) {
+            user.addresses.push(newAddress);
+            localStorage.setItem('addresses', JSON.stringify(user.addresses));
+            loadAddresses();
+            document.getElementById('newAddressInput').value = '';
+            document.getElementById('addressInput').style.display = 'none';
+        } else {
+            alert("Please enter an address.");
+        }
+    }
+
+    function loadAddresses() {
+        const addressList = document.getElementById('addressList');
+        addressList.innerHTML = '';
+        user.addresses.forEach((address, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `<span class="address-text">${address}</span>
+                <input type="text" class="address-edit-mode" placeholder="Edit address" />
+                <button class="edit-address-btn" onclick="editAddress(${index})">Edit</button>
+                <button class="remove-address-btn" onclick="removeAddress(${index})">Remove</button>`;
+            addressList.appendChild(li);
+        });
+    }
+
+    function editAddress(index) {
+        const addressItem = document.querySelectorAll('.address-text')[index];
+        const editInput = addressItem.nextElementSibling;
+        const editBtn = addressItem.parentElement.querySelector('.edit-address-btn');
+
+        if (editBtn.textContent === "Edit") {
+            editInput.value = addressItem.textContent;
+            addressItem.style.display = 'none';
+            editInput.style.display = 'inline';
+            editBtn.textContent = "Save";
+        } else {
+            user.addresses[index] = editInput.value;
+            localStorage.setItem('addresses', JSON.stringify(user.addresses));
+            loadAddresses();
+        }
+    }
+
+    function removeAddress(index) {
+        if (confirm("Are you sure you want to remove this address?")) {
+            user.addresses.splice(index, 1);
+            localStorage.setItem('addresses', JSON.stringify(user.addresses));
+            loadAddresses();
+        }
+    }
+
+    function logout() {
+        localStorage.clear();
+        window.location.href = 'login.html'; // Change to your login page
+    }
+
+    function goHome() {
+        window.location.href = 'index.html'; // Change to your home page
+    }
+</script>
+</body>
+</html>

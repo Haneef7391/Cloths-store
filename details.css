@@ -1,0 +1,208 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #c2a596;
+}
+
+/* Loading Overlay Styling */
+/* Style for loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.582); /* Semi-transparent white background */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Spinner icon styling */
+.loading-overlay i {
+    font-size: 48px; /* Adjust the size as needed */
+    animation: spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+header {
+    background-color:#8f6147; /* Dark Blue for header */
+    padding: 1rem; /* Adjust as needed */
+    text-align: center;
+    width: 100%; /* Full width */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem; /* Adjust for side spacing */
+    font-weight: 600;
+}
+nav h1{
+    color: #4e3526;
+}
+ul {
+    list-style: none;
+}
+
+ul li {
+    display: inline;
+    margin: 0 1rem;
+    font-weight: 200;
+}
+
+ul li a {
+    color: #5a3a27; /* Electric Purple for links */
+    text-decoration: none;
+    font-size: 19px;
+}
+.h1 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #c2a596;
+}
+
+.product-details img {
+    max-width: 230px;
+    top: 0px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 70%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on hover */
+}
+
+.product-details img:hover {
+    transform: scale(1.1); /* Scales the image by 10% on hover */
+    box-shadow: 10px 6px 20px rgba(100, 99, 99, 0.9); /* Adjust shadow for a stronger effect on hover */
+}
+
+.product-details img:hover{
+    box-shadow: 10px 4px 10px rgba(0, 0, 0, 0.7);  
+}
+.product-details h2 {
+    margin: 10px 0;
+    margin-right: 70%;
+}
+
+.dis p {
+    font-size: large;
+    text-align: center;
+    position: relative; /* Keep it in the normal flow */
+    top: px; /* Adjust this value to move it down */
+    right: 63%;
+    transform: translateX(-50%); /* Center it horizontally */
+    width: 400px; /* Allow it to size based on content */
+    z-index: 1; /* Ensure it’s above other content */
+    text-shadow: 2px 2px 8px rgb(0, 0, 0); /* Apply shadow only to the text */
+}
+
+.product-details p {
+    font-size: 20px;
+    margin: 10px 0;
+    margin-right: 70%;
+}
+.star-rating {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    padding-left: 250px;
+    margin-right: 90%;
+}
+
+.star-rating i {
+    color: #eeff00; /* Gold color for filled stars */
+    font-size: 14px; /* Change the size of the stars */
+    margin: 0 5px; /* Spacing between stars */
+    transition: color 0.3s; /* Smooth transition for hover effects */
+    text-shadow: 2px 2px 8px rgb(0, 0, 0);
+}
+
+.star-rating i:hover,
+.star-rating i:hover ~ i {
+    color: #ffcc00; /* Change color on hover */
+}
+
+.button-container {
+    display: flex; /* Use Flexbox for layout */
+    justify-content: flex-start; /* Align buttons to the left */
+    gap: 10px; /* Space between buttons */
+    margin-top: 10px; /* Space above buttons */
+    margin-right: 70%;
+}
+
+.btn {
+    background-color: #61341e; /* Change to a vibrant color */
+    color: white; /* Keep text color white */
+    border: none;
+    padding: 15px 30px; /* Increase padding for larger buttons */
+    border-radius: 8px; /* Slightly larger border radius */
+    cursor: pointer;
+    margin: 5px 0; /* Remove right margin to align left */
+    font-size: 1.1rem; /* Increase font size */
+    transition: background-color 0.3s;
+    box-shadow: 10px 0px 10px #ad652994;  
+}
+
+
+.btn:hover{
+    box-shadow: 10px 4px 10px rgba(0, 0, 0, 0.7);  
+}
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Adjust space as needed */
+}
+
+.product-rating .fas, .product-rating .far {
+    font-size: 20px; /* Adjust size as needed */
+    color: gold; /* Star color */
+}
+
+.rating-text {
+    margin-left: 5px;
+    font-size: 16px; /* Adjust text size */
+    color: #333; /* Text color */
+}
+
+footer {
+    background-color: #5f3b29;
+    color: white;
+    padding: 1rem; /* Adjust as needed */
+    text-align: center;
+    width: 100%; /* Full width */
+    margin-top: 0; /* Remove margin-top */
+    position: relative;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}

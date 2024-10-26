@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Store</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/23330d1986.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loading-overlay" class="loading-overlay" style="display: none;">
+    <i class="fa-solid fa-spinner fa-spin" style="color: #4c291a;"></i>
+</div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="nav">
+                <h1>H-Fashion</h1>
+            </div>
+            <!-- <div class="ser" id="search-box">
+                <input type="text" name="search-box" placeholder="Search" readonly onclick="this.removeAttribute('readonly');">
+            </div> -->
+            <ul id="nav-links">
+                <li><a href="#home" class="nav-link"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="shop.html" class="nav-link"><i class="fa-solid fa-shirt"></i></a></li>
+                <li><a href="cart.html" class="nav-link"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li><a href="orders.html" class="nav-link"><i class="fa-solid fa-gift"></i></a></li>
+                <!-- Auth link will be updated dynamically -->
+                <li class="profile-menu-container" id="auth-link">
+                    <!-- Profile icon or picture with drop-down menu -->
+                    <i class="fa-solid fa-user profile-icon" id="profile-icon" style="display: none;"></i>
+                    <img src="" alt="Profile Pic" id="profile-pic" class="profile-pic" style="display: none;">
+                    <div class="profile-dropdown">
+                        <!-- Username will be inserted here dynamically -->
+                        <a href="account.html">Profile</a>
+                        <a href="orders.html"><i class="fa-solid fa-gift"></i> Orders</a>
+                        <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                        <a href="#" id="logout"><i class="fa-solid fa-right-to-bracket"></i> Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Content -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>New Arrivals</h2>
+            <p>Explore the latest trends in fashion</p>
+            <a href="shop.html" class="nbtn nav-button">Check now</a>
+        </div>
+    </section>
+
+    <section id="shop" class="shop-section">
+        <h2>Shop Our Collection</h2>
+        <div class="product-list">
+            <div class="product-item" id="mens">
+                <img src="men.jpg" alt="Shirt's, pant's, etc..">
+                <h3>Men's Wear</h3>
+                <p>Starting from 399₹</p>
+                <a href="https://www.amazon.com/s?k=mens+wear" class="btn nav-button" target="_blank">Buy Now</a>
+                <a href="https://www.amazon.com/s?k=new+arrivals+for+men" class="btn nav-button" target="_blank">New Arrivals</a>
+            </div>
+            <div class="product-item" id="womens">
+                <img src="women.jpeg" alt="Dress, Chudidhar's, etc...">
+                <h3>Women's Wear</h3>
+                <p>Starting from 399₹</p>
+                <a href="https://www.amazon.com/s?k=womens+wear" class="btn nav-button" target="_blank">Buy Now</a>
+                <a href="https://www.amazon.com/s?k=new+arrivals+for+women" class="btn nav-button" target="_blank">New Arrivals</a>
+            </div>
+            <div class="product-item" id="kids">
+                <img src="kids.jpg" alt="Shoes, T-shirt's, etc....">
+                <h3>Kid's Wear</h3>
+                <p>Starting from 299₹</p>
+                <a href="https://www.amazon.com/s?k=kids+wear" class="btn nav-button" target="_blank">Buy Now</a>
+                <a href="https://www.amazon.com/s?k=new+arrivals+for+kids" class="btn nav-button" target="_blank">New Arrivals</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <h2>About Us</h2>
+        <p>At H-Fashion, we bring you the latest in fashion trends with a unique blend of style and comfort.</p>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2>Contact Us</h2>
+        <p>Email: contact@hfashion.com</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 H-Fashion. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Function to show the loading animation
+        function showLoading() {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.style.display = 'flex';
+        }
+    
+        // Function to hide the loading animation
+        function hideLoading() {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.style.display = 'none';
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide the loading overlay in case it's visible on page load
+            hideLoading();
+    
+            // Profile and Authentication Handling
+            const username = localStorage.getItem('username');
+            const profilePicUrl = localStorage.getItem('profilePic'); // Get profile pic URL from localStorage
+            const authLink = document.getElementById('auth-link');
+            const profileIcon = document.getElementById('profile-icon');
+            const profilePic = document.getElementById('profile-pic');
+    
+            if (username) {
+                // User is logged in
+                if (profilePicUrl) {
+                    // If user has a profile picture, show it
+                    profilePic.src = profilePicUrl;
+                    profilePic.style.display = 'inline';
+                } else {
+                    // Show default profile icon if no picture
+                    profileIcon.style.display = 'inline';
+                }
+    
+                // Update the dropdown with the username
+                const existingGreeting = authLink.querySelector('.profile-greeting');
+                if (!existingGreeting) {
+                    authLink.querySelector('.profile-dropdown').insertAdjacentHTML('afterbegin', `<p class="profile-greeting" style="padding: 12px 16px; margin: 0; font-weight: bold;">Hi, ${username}</p>`);
+                }
+            } else {
+                // User is not logged in - Show login/signup link
+                authLink.innerHTML = `<a href="login.html" class="nav-button"><i class="fa-solid fa-user"></i> Login/Signup</a>`;
+            }
+    
+            // Logout functionality
+            const logoutBtn = document.getElementById('logout');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    showLoading();
+                    setTimeout(() => {
+                        localStorage.removeItem('username');
+                        localStorage.removeItem('profilePic');
+                        window.location.href = 'login.html';
+                    }, 1000); // Simulate a short delay for logout
+                });
+            }
+    
+            // Dropdown Menu Toggle
+            const profileMenuContainer = document.querySelector('.profile-menu-container');
+            const profileDropdown = document.querySelector('.profile-dropdown');
+            
+            // Toggle dropdown on click
+            profileMenuContainer.addEventListener('click', function(event) {
+                event.stopPropagation();
+                profileMenuContainer.classList.toggle('active');
+            });
+    
+            // Close dropdown when clicking outside of the profile menu
+            document.addEventListener('click', function(event) {
+                if (!profileMenuContainer.contains(event.target)) {
+                    profileMenuContainer.classList.remove('active');
+                }
+            });
+    
+            // Handle Loading Animation for All Navigation Buttons and Links
+            const navButtons = document.querySelectorAll('.nav-button, .nav-link');
+    
+            navButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    const href = this.getAttribute('href');
+    
+                    // If the link is an internal anchor link, do not show loading
+                    if (href.startsWith('#')) {
+                        return; // Allow default behavior
+                    }
+    
+                    // Check if the link is external or has a target that opens in a new tab
+                    const isExternal = href.startsWith('http') || href.startsWith('https');
+                    const isNewTab = this.getAttribute('target') === '_blank';
+    
+                    if (isExternal && isNewTab) {
+                        return; // Allow default behavior for external links opening in a new tab
+                    }
+    
+                    // Prevent default action to show loading
+                    event.preventDefault();
+                    showLoading();
+    
+                    // Simulate loading time before navigating
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 1000); // Adjust the delay as needed (e.g., 1000ms)
+                });
+            });
+        });
+    </script>
+    
+    </script>
+</body>
+</html>

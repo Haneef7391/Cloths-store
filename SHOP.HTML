@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - H-Fashion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shop.css">
+    <script src="https://kit.fontawesome.com/23330d1986.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div id="loading-overlay" class="loading-overlay" style="display: none;">
+            <i class="fa-solid fa-spinner fa-spin" style="color: #4c291a;"></i>
+        </div>           
+        <script src="loading.js"></script>
+        <nav>
+            <div class="nav">
+                <h1>H-Fashion</h1>
+            </div>
+            <div class="ser" id="search-container">
+                <input type="text" id="search-box" placeholder="Search" readonly onclick="this.removeAttribute('readonly');">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <ul id="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-gift"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Shop Section -->
+    <section class="shop-section">
+        <h2>Our Latest Collection</h2>
+        <div class="product-list" id="product-list">
+            <!-- Products will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 H-Fashion. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Dynamic Product Rendering and Cart Management -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const productList = document.getElementById('product-list');
+    const searchBox = document.getElementById('search-box');
+    const products = [
+                { id: 1, name: 'T-Shirt', price: 499, image: 'T-Shirt.png' },
+                { id: 2, name: 'Jeans', price: 999, image: 'jeans.png' },
+                { id: 3, name: 'Jacket', price: 1999, image: 'jacket.png' },
+                { id: 4, name: 'Sweater', price: 799, image: 'sweater.png' },
+                { id: 5, name: 'Sneakers', price: 1599, image: 'sneakers.png' },
+                { id: 6, name: 'Cap', price: 199, image: 'cap.png' },
+                { id: 7, name: 'Sunglasses', price: 299, image: 'sunglasses.png' },
+                { id: 8, name: 'Dress', price: 1299, image: 'dress.png' },
+                { id: 9, name: 'Plazo', price: 1299, image: 'plazo.png' },
+                { id: 10, name: 'Belt', price: 199, image: 'belt.png' },
+                { id: 11, name: 'Hoodie', price: 1199, image: 'hoodie.png' },
+                { id: 12, name: 'Shorts', price: 499, image: 'shorts.png' },
+                { id: 13, name: 'Boots', price: 1799, image: 'boots.png' },
+                { id: 14, name: 'Pants', price: 999, image: 'pants.png' },
+                { id: 15, name: 'Blazer', price: 2499, image: 'blazer.png' },
+                { id: 16, name: 'Watch', price: 1499, image: 'watch.png' },
+                { id: 17, name: 'Socks', price: 199, image: 'socks.png' },
+                { id: 18, name: 'Shirt', price: 599, image: 'shirt.png' },
+                { id: 19, name: 'Tie', price: 299, image: 'tie.png' },
+                { id: 20, name: 'kurtha', price: 1899, image: 'kurtha.png' }
+    ];
+
+    // Render Products Dynamically
+    function renderProducts(filteredProducts) {
+        productList.innerHTML = '';
+        const itemsToRender = filteredProducts || products;
+
+        itemsToRender.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.className = 'product-item';
+            productElement.innerHTML = `
+                <a href="details.html?id=${product.id}" target="_blank">
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>Price: ₹${product.price}</p>
+                </a>
+            `;
+            productList.appendChild(productElement);
+        });
+    }
+
+    // Handle Search Functionality
+    searchBox.addEventListener('input', function() {
+        const searchTerm = searchBox.value.toLowerCase();
+        const filteredProducts = products.filter(product => 
+            product.name.toLowerCase().includes(searchTerm)
+        );
+        renderProducts(filteredProducts);
+    });
+
+    // Handle Button Clicks (Add to Cart)
+    productList.addEventListener('click', function(e) {
+        // ... (your existing code for adding to cart)
+    });
+
+    // Initialize product list
+    renderProducts();
+});
+
+    </script>
+</body>
+</html>

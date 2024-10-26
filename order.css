@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color:#c2a596; /* Deep Blue Background */
+    overflow-x: hidden;
+    color:#38251c;
+}
+
+/* Loading Overlay Styling */
+/* Style for loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.582); /* Semi-transparent white background */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Spinner icon styling */
+.loading-overlay i {
+    font-size: 48px; /* Adjust the size as needed */
+    animation: spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800; /* Bold for headings */
+}
+
+p, a, li {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400; /* Regular for body text */
+}
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    position: relative;
+    font-weight: 600;
+}
+
+ul {
+    list-style: none;
+}
+
+ul li {
+    display: inline;
+    font-weight: 200;
+}
+
+ul li a {
+    color:#3d261b; /* Electric Purple for links */
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+/* Orders Section Styles */
+.orders-section {
+    padding: 20px;
+    padding-right: 1000px;
+    background-color: #c2a596; /* Light background color */
+    color: #fff7f7; /* Dark text color for readability */
+}
+
+ h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #271a14; /* Matches your color scheme */
+}
+
+.order-list {
+    display: flex;
+    flex-direction:column;
+    gap: 50px;
+}
+
+.order-item {
+    background-color:#36251d;
+    padding: 15px;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: -3px 3px 29px 9px#915435;
+    transition: background-color 0.3s ease;
+}
+.order-item:hover {
+    box-shadow: -3px 4px 29px 9px #70391d;
+}
+
+.order-item h3 {
+    margin-top: 0;
+    color:#976146; /* Color for the order number */
+}
+
+.order-item p {
+    margin: 5px 0;
+}
+
+.btn {
+    background-color:#684c40; /* Purple for checkout */
+    color: #c5b7b7;
+    border: none;
+    color: inherit;
+    padding: 1rem 2rem;
+    margin: 1rem auto; /* Center button with automatic margins */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem; /* Increased font size */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2); /* Softer shadow */
+    transition: background-color 0.3s ease; /* Smooth background change */
+    text-decoration: none; /* Remove underline */
+}
+.order-item .btn:hover {
+    background-color: #000000; /* Darker shade on hover */
+}
+
+/* Header and Navigation Styles (to ensure consistency) */
+header {
+    background-color:#8f6147; /* Match your header background color */
+    color: white;
+    padding: 10px 20px;
+}
+
+.nav h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #3d2417;
+}
+
+#nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-links li {
+    display: inline;
+    margin: 0 10px;
+}
+
+#nav-links a {
+    color: #42281b;
+    text-decoration: none;
+}
+
+#nav-links a:hover {
+    color: rgb(15, 14, 15); /* Change color on hover */
+}
+footer {
+    background-color: #613d2b;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    top: 450x;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}

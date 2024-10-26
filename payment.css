@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+/* General Styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0; /* Remove margin to prevent side gaps */
+    padding: 0;
+    background-color: #5c4334af;
+    color: #000000;
+    background-image: url(pay.jpg);
+}
+
+/* Loading Overlay Styling */
+/* Style for loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.582); /* Semi-transparent white background */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Spinner icon styling */
+.loading-overlay i {
+    font-size: 48px; /* Adjust the size as needed */
+    animation: spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    height: auto;
+    background: #f9bdff44;
+    border-radius: 15px;
+    box-shadow: 2px 4px 11px #4b301975;
+}
+
+/* Header and Nav Styling */
+header {
+    background-color: #4d3221;
+    padding: 1rem 0;
+    width: 100%;
+    text-align: center;
+    bottom: 10px;
+    margin: 0; /* Ensure no margin at the sides */
+    position: relative;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem; /* Adjust padding to control space at sides */
+    width: 100%; /* Ensure nav takes full width */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.logo h1 {
+    color: #4CAF50;
+    font-weight: 700;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+ul li {
+    margin: 0 1rem;
+}
+
+ul li a {
+    color: #b4adad;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+ul li a:hover {
+    color: #000000; /* Change color on hover */
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 1rem; /* Adjust padding for smaller screens */
+    }
+
+    ul {
+        flex-direction: column;
+        padding: 0;
+        width: 100%;
+    }
+
+    ul li {
+        margin: 0.5rem 0;
+    }
+
+    ul li a {
+        font-size: 1.5rem;
+    }
+}
+
+/* Other Styles */
+h3.title {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.form {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.col {
+    width: 48%;
+}
+.payment-details{
+    display: none;
+}
+/* Input Box Styling */
+.inputBox input[type="text"],
+.inputBox input[type="email"],
+.inputBox input[type="number"],
+.inputBox select,
+.inputBox-upi input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #c0a28a;
+    border-radius: 8px;
+    background-color: #f4f1ec;
+    font-size: 16px;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.inputBox input[type="text"]:focus,
+.inputBox input[type="email"]:focus,
+.inputBox input[type="number"]:focus,
+.inputBox select:focus,
+.inputBox-upi input[type="text"]:focus {
+    outline: none;
+    border-color: #704b33;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}
+
+.inputBox label {
+    display: block;
+    margin-bottom: 10px;
+    color: #57190e;
+    font-weight: 690;
+    font-size: 16px;
+}
+
+.inputBox i {
+    color: #704b33;
+    padding-right: 10px;
+}
+
+.submit_btn {
+    width: 100%;
+    max-width: 350px;
+    padding: 15px;
+    background-color: #704b33;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submit_btn:hover {
+    background-color: #5c4334;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .submit_btn {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+

@@ -1,0 +1,224 @@
+/* Base body styling */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-image: url('https://i.pinimg.com/originals/79/a3/84/79a384c3c449ad01b0e57e790807b2c0.gif');
+    background-size: cover;
+    background-position: center;
+    overflow-x: hidden;
+    color: #f1eeed;
+}
+
+/* Loading Overlay Styling */
+/* Style for loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.582); /* Semi-transparent white background */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Spinner icon styling */
+.loading-overlay i {
+    font-size: 48px; /* Adjust the size as needed */
+    animation: spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Account page container */
+.account-page {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 50px;
+}
+
+/* Headings */
+.account-page h2 {
+    color: #7d19fc; /* Electric Purple */
+    text-align: center;
+    margin-bottom: 70px; /* Space below heading */
+    font-size: 30px;
+}
+
+.account-page h3 {
+    color: #ff00ff; /* Neon Pink */
+    text-align: left;
+}
+
+/* Profile picture container */
+.profile-picture {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.profile-picture img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #ff00ff; /* Neon Pink border */
+    box-shadow: 0 4px 10px rgba(255, 0, 255, 0.7);
+}
+/* Profile Picture Buttons */
+.profile-picture button {
+    background-color: #ff00ff; /* Neon Pink */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* Space above the buttons */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.profile-picture button:hover {
+    background-color: #ff1493; /* Darker shade on hover */
+}
+
+.profile-picture button:disabled {
+    background-color: #ccc; /* Grey out disabled buttons */
+    cursor: not-allowed;
+}
+
+/* User info box styling */
+.info-box {
+    background-color: rgba(49, 47, 47, 0.9); /* Darker semi-transparent background */
+    border: 2px solid #ff00ff; /* Neon Pink border */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0; /* Margin for spacing */
+    box-shadow: 0 4px 20px rgba(255, 0, 255, 0.5); /* Neon shadow effect */
+}
+
+/* User and address details styling */
+.user-details, .address-details {
+    margin-bottom: 20px;
+}
+
+/* Detail item container */
+.detail-item {
+    margin: 10px 0;
+}
+
+/* Edit/remove buttons */
+.detail-item button, .remove-address-btn, .add-address-btn, .edit-address-btn {
+    background-color: #ff00ff; /* Neon Pink */
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.detail-item button:hover,
+.remove-address-btn:hover,
+.add-address-btn:hover,
+.edit-address-btn:hover {
+    background-color: #ff1493; /* Hover effect for buttons */
+}
+
+/* Save button styling */
+.save-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #ff1493;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Logout Section */
+.logout-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #df11df; /* Custom color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.logout-btn:hover {
+    background-color: #f821e6; /* Darker shade on hover */
+}
+
+/* Additional styles for address list */
+.address-list {
+    list-style: none;
+    padding: 0;
+}
+
+.address-list li {
+    background-color: rgba(145, 145, 145, 0.5); /* Light transparent background */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffb2ff; /* Bright Yellow text */
+}
+
+.address-input {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Address input field */
+.address-input .custom-input {
+    flex-grow: 1;
+    padding: 5px;
+    border: 1px solid #ff00ff; /* Neon Pink border */
+    border-radius: 5px;
+    background-color: rgba(255, 20, 255, 0.2); /* Light background */
+}
+
+.address-input .input-field {
+    outline: none; /* Remove outline */
+    color: #000; /* Text color */
+    min-height: 30px; /* Minimum height for input field */
+}
+
+/* Placeholder styling */
+.input-field:empty:before {
+    content: "Enter your address...";
+    color: #888; /* Placeholder color */
+}
+
+.edit-mode { display: none; }
+.detail-item.editing .edit-mode { display: inline; }
+.detail-item.editing .view-mode { display: none; }
+.address-input { display: none; }
+.address-text { display: inline; }
+.address-edit-mode { display: none; }
+.address-item.editing .address-edit-mode { display: inline; }
+.address-item.editing .address-text { display: none; }
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}

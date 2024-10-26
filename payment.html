@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Payment Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="payment.css">
+    <script src="https://kit.fontawesome.com/23330d1986.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <i class="fa-solid fa-spinner fa-spin" style="color: #4c291a;"></i>
+    </div>        
+    <script src="loading.js"></script>
+    <header>
+        <nav>
+            <div class="nav">
+                <h1>H-Fashion</h1>
+            </div>
+            <ul id="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="shop.html"><i class="fa-solid fa-shirt"></i></a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-gift"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <form action="#">
+            <div class="row">
+                <div class="col">
+                    <h3 class="title">Billing Address</h3>
+                    <div class="inputBox">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="inputBox">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="Enter email address" required>
+                    </div>
+                    <div class="inputBox">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" placeholder="Enter address" required>
+                    </div>
+                    <div class="inputBox">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" placeholder="Enter city" required>
+                    </div>
+                    <div class="flex">
+                        <div class="inputBox">
+                            <label for="state">State:</label>
+                            <input type="text" id="state" placeholder="Enter state" required>
+                        </div>
+                        <div class="inputBox">
+                            <label for="zip">Zip Code:</label>
+                            <input type="text" id="zip" placeholder="123456" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <h3 class="title">Payment</h3>
+                    <div class="inputBox">
+                        <label>Choose Payment Method:</label>
+                        <div class="payment-methods">
+                            <input type="radio" name="paymentMethod" id="upi" value="upi" onclick="showPaymentDetails('upi-details')" required>
+                            <label for="upi"><i class="fa-solid fa-mobile"></i> UPI</label>
+                            <input type="radio" name="paymentMethod" id="card" value="card" onclick="showPaymentDetails('card-details')">
+                            <label for="card"><i class="fa-solid fa-credit-card"></i> Credit/Debit</label>
+                            <input type="radio" name="paymentMethod" id="cod" value="cod" onclick="showPaymentDetails('cod-details')">
+                            <label for="cod"><i class="fa-solid fa-coins"></i> Cash on Delivery</label>
+                        </div>
+                    </div>
+                    <div id="upi-details" class="payment-details">
+                        <label>Select UPI App:</label>
+                        <div class="upi-options">
+                            <input type="radio" name="upiApp" id="gpay" value="gpay" required>
+                            <label for="gpay"><img src="google-pay.png" alt="GPay" width="50"></label>
+                            <input type="radio" name="upiApp" id="phonepe" value="phonepe">
+                            <label for="phonepe"><img src="phonepay.png" alt="PhonePe" width="50"></label>
+                            <input type="radio" name="upiApp" id="paytm" value="paytm">
+                            <label for="paytm"><img src="paytm.jpg" alt="Paytm" width="50"></label>
+                        </div>
+                        <div class="inputBox-upi">
+                            <label for="upiId">UPI ID:</label>
+                            <input type="text" id="upiId" placeholder="1234@xyz" required>
+                        </div>
+                    </div>
+                    <div id="card-details" class="payment-details">
+                        <div class="inputBox">
+                            <label for="cardName">Name On Card:</label>
+                            <input type="text" id="cardName" placeholder="Enter card name" required>
+                        </div>
+                        <div class="inputBox">
+                            <label for="cardNum">Credit Card Number:</label>
+                            <input type="text" id="cardNum" placeholder="1111-2222-3333-4444" maxlength="19" required>
+                        </div>
+                        <div class="inputBox">
+                            <label for="expMonth">Exp Month:</label>
+                            <select id="expMonth" required>
+                                <option value="">Choose month</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                        </div>
+                        <div class="flex">
+                            <div class="inputBox">
+                                <label for="expYear">Exp Year:</label>
+                                <select id="expYear" required>
+                                    <option value="">Choose Year</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+                                </select>
+                            </div>
+                            <div class="inputBox">
+                                <label for="cvv">CVV:</label>
+                                <input type="number" id="cvv" placeholder="123" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cod-details" class="payment-details">
+                        <p>No additional details required. You can pay when the product is delivered.</p>
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" value="Proceed to Checkout" class="submit_btn">
+        </form>
+    </div>
+    <script>
+        function showPaymentDetails(paymentMethod) {
+            document.getElementById('upi-details').style.display = 'none';
+            document.getElementById('card-details').style.display = 'none';
+            document.getElementById('cod-details').style.display = 'none';
+            document.getElementById(paymentMethod).style.display = 'block';
+        }
+    
+        // Initially hide all details when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            showPaymentDetails('');  // Hide all by default
+        });
+    
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent form's default submission
+            console.log("Submit button clicked");
+    
+            const paymentSuccessful = true;
+    
+            if (paymentSuccessful) {
+                console.log("Payment successful");
+    
+                // Retrieve cart items and calculate the total price
+                let orders = JSON.parse(localStorage.getItem('orders')) || [];
+                const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    
+                // Create a new order object
+                const order = {
+                    id: new Date().getTime(),
+                    date: new Date().toLocaleString(),
+                    status: 'Pending',
+                    total: totalPrice,
+                    items: cartItems
+                };
+    
+                // Save the order to localStorage
+                orders.push(order);
+                localStorage.setItem('orders', JSON.stringify(orders));
+    
+                // Clear cart items after placing the order
+                localStorage.removeItem('cartItems');
+    
+                // Show success message
+                alert('Payment processed successfully! Your order has been placed.');
+    
+                // Redirect to orders.html after successful payment
+                window.location.href = 'orders.html';
+            } else {
+                console.log("Payment failed");
+                alert('Payment failed. Please try again.');
+            }
+        });
+    </script>
+    
+
+</body>
+</html>

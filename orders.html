@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/23330d1986.js" crossorigin="anonymous"></script>
+    <title>Your Orders</title>
+    <link rel="stylesheet" href="order.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <i class="fa-solid fa-spinner fa-spin" style="color: #4c291a;"></i>
+    </div>      
+    <script src="loading.js"></script>
+    <header>
+        <nav>
+            <div class="nav">
+                <h1>H-Fashion</h1>
+            </div>
+            <ul id="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="shop.html"><i class="fa-solid fa-shirt"></i></a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li id="auth-link">
+                    <!-- Profile menu will be inserted here -->
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <h2>Your Orders</h2>
+    
+    <section id="orders" class="orders-section">
+        <div class="order-list" id="order-list">
+            <!-- Orders will be dynamically inserted here -->
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 H-Fashion. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderList = document.getElementById('order-list');
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+            // Function to render the orders list
+            function renderOrders() {
+                orderList.innerHTML = '';
+                if (orders.length === 0) {
+                    orderList.innerHTML = '<p>No orders found.</p>';
+                    return;
+                }
+                
+                orders.forEach((order, index) => {
+                    const orderItem = document.createElement('div');
+                    orderItem.className = 'order-item';
+                    orderItem.innerHTML = `
+                        <h3>Order #${order.id}</h3>
+                        <p>Date: ${order.date}</p>
+                        <p>Status: ${order.status}</p>
+                        <p>Total: ₹${order.total}</p>
+                        <a href="detail.html?id=${order.id}" class="btn"><i class="fa-regular fa-eye"></i> Details</a>
+                        <button class="remove-order-btn btn" data-index="${index}"><i class="fa-solid fa-trash-can"></i></button>
+                    `;
+                    orderList.appendChild(orderItem);
+                });
+            }
+
+            // Event listener for order removal
+            orderList.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-order-btn')) {
+                    const orderIndex = e.target.closest('.remove-order-btn').getAttribute('data-index');
+                    if (orderIndex !== null) {
+                        orders.splice(orderIndex, 1); // Remove the selected order
+                        localStorage.setItem('orders', JSON.stringify(orders)); // Update localStorage
+                        renderOrders(); // Re-render the updated list of orders
+                        console.log('Order removed:', orderIndex); // Log for debugging
+                    } else {
+                        console.error('Order index not found.');
+                    }
+                }
+            });
+
+            renderOrders(); // Initial render of orders
+        });
+    </script>
+</body>
+</html>

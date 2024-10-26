@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Sign Up - H-Fashion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <i class="fa-solid fa-spinner fa-spin" style="color: #4c291a;"></i>
+    </div>       
+    <script src="loading.js"></script>
+    <div class="container">
+        <h1 class="welcome">Welcome to H-Fashions</h1>
+    </div>
+    
+    <div class="login-container">
+        <!-- Login Form -->
+        <div class="login-box" id="login-box">
+            <h2>Login to H-Fashion</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="input-group">
+                    <button type="submit" class="btn login-btn">Login</button>
+                </div>
+                <p class="toggle-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+            </form>
+        </div>
+        <!-- Sign-Up Form (Initially Hidden) -->
+        <div class="login-box" id="signup-box" style="display: none;">
+            <h2>Sign Up for H-Fashion</h2>
+            <form id="signupForm">
+                <div class="input-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" id="signup-username" name="username" placeholder="Create your username" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" placeholder="Create your password" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <button type="submit" class="btn signup-btn">Sign Up</button>
+                </div>
+                <p class="toggle-link">Already have an account? <a href="#" id="login-link">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between login and sign-up forms
+        const signupLink = document.getElementById('signup-link');
+        const loginLink = document.getElementById('login-link');
+        const loginBox = document.getElementById('login-box');
+        const signupBox = document.getElementById('signup-box');
+
+        signupLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            loginBox.style.display = 'none';
+            signupBox.style.display = 'block';
+        });
+
+        loginLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            signupBox.style.display = 'none';
+            loginBox.style.display = 'block';
+        });
+
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            formData.append('referrer', 'login'); // Add referrer parameter
+
+            fetch('https://script.google.com/macros/s/AKfycbxEVWLyIkdWs4kGKuFGGvEoLIW26lrfTJCjIg0hg-1CpA3-a4VOuM_3VwpdMn2qWEt3/exec', { // Replace with your login web app URL
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    // Store user info in localStorage
+                    localStorage.setItem('username', formData.get('username'));
+                    alert('Login successful!');
+                    this.reset(); // Clear form fields after submission
+                    // Redirect to account page
+                    window.location.href = 'account.html';
+                } else if (data.error === 'user_not_found') {
+                    // User not found - show sign up option
+                    if (confirm("User not found. Would you like to sign up?")) {
+                        loginBox.style.display = 'none';
+                        signupBox.style.display = 'block';
+                    }
+                } else {
+                    alert('Login failed: ' + data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Handle sign-up form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            formData.append('referrer', 'signup'); // Add referrer parameter
+
+            fetch("https://script.google.com/macros/s/AKfycbzA7d-35aCFtC7b0xUPJyCLU7kGyTHGD74rQFGS3TcKIKVgqCtfCg5YnlJ-xRwLhaA/exec", { // Replace with your signup web app URL
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    alert('Sign up successful!');
+                    this.reset(); // Clear form fields after submission
+                    // Redirect to account page
+                    window.location.href = 'account.html';
+                } else {
+                    alert('Sign up failed: ' + data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
